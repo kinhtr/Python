@@ -1,0 +1,6 @@
+# -*- coding: cp1252 -*-
+
+a = 1000
+b = 24
+c = (a + b + 15)**2
+print("The final results of the calculation was:", c)
