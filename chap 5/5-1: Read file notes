@@ -1,0 +1,12 @@
+# -*- coding: cp1252 -*-
+
+file = open("facts.txt", "r")
+content = file.read()
+print("Following was read from the file:", content)
+
+#If readlines() is used:
+#print("Following was read from the file:", end = " ")
+#for i in content:
+#	print(i, end = "") # remove extra automatic line break due to print command
+
+#READ() RETURNS STRING, READLINES() RETURNS LIST
