@@ -1,0 +1,37 @@
+# -*- coding: cp1252 -*- 
+# Note for loop: the elements in the range(first, last, step) works the same way as slicing
+# first is inlcuded, last is excluded in the range
+
+print("Calculator")
+change = True
+while True:
+	if change:
+		a = int(input("Give the first number: "))
+		b = int(input("Give the second number: "))
+	print("(1) +\n(2) -\n(3) *\n(4) /\n(5)Change numbers\n(6)Quit")
+	print("Current numbers:", a, b)
+	selection = int(input("Please select something (1-6): "))
+	# set the change's value to False after the first round
+	change = False
+	if selection == 1:
+		c = a + b
+		print("The result is:", c)
+	elif selection == 2:
+		c = a - b
+		print("The result is:", c)
+	elif selection == 3:
+		c = a * b
+		print("The result is:", c)
+	elif selection == 4:
+		c = a / b
+		print("The result is:", c)
+	elif selection == 5:
+		# change's value return to True to make change number possible 
+		change = True
+		continue
+	elif selection == 6:
+		print("Thank you!")
+		break
+	else:
+		# do nothing
+		pass
