@@ -1,0 +1,21 @@
+# -*- coding: cp1252 -*- 
+
+print("Calculator")
+a = int(input("Give the first number: "))
+b = int(input("Give the second number: "))
+print("(1) +\n(2) -\n(3) *\n(4) /")
+selection = int(input("Please select something (1-4): "))
+if selection == 1:
+	c = a + b
+	print("The result is:", c)
+elif selection == 2:
+	c = a - b
+	print("The result is:", c)
+elif selection == 3:
+	c = a * b
+	print("The result is:", c)
+elif selection == 4:
+	c = a / b
+	print("The result is:", c)
+else:
+	print("Selection was not correct.")
