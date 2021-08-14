@@ -1,0 +1,10 @@
+# -*- coding: cp1252 -*- 
+
+x = int(input("Give a number: "))
+y = int(input("Give another number: "))
+if (x % 2 == 0) and (y % 2 == 0):
+	print("Both numbers are even.")
+elif (x % 2 == 1) and (y % 2 == 1):
+	print("Both numbers are odd.")
+else:
+	print("One of the numbers is even.")
