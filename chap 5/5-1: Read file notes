@@ -3,6 +3,7 @@
 file = open("facts.txt", "r")
 content = file.read()
 print("Following was read from the file:", content)
+file.close()
 
 #If readlines() is used:
 #print("Following was read from the file:", end = " ")
