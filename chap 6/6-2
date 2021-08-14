@@ -1,0 +1,11 @@
+# -*- coding: cp1252 -*-
+
+def poweroftwo(power = 0): #set the default value of power to 0
+	result = 2**power
+	return result
+def main():
+	number = int(input("Give a number: "))
+	result = poweroftwo(number)
+	print("The result is", result)
+if __name__ == "__main__":
+    main()
