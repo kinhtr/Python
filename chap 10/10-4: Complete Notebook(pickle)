@@ -1,0 +1,72 @@
+# -*- coding: cp1252 -*-
+
+# This exercise practices the use of bit-read and bit-write mode for the application of advanced data
+# structure file handling such as list manipulation with file
+import time, pickle
+
+filename = "notebook.dat" #default filename
+# function for writing file in wb mode
+def writefile(notes):
+	file = open(filename, "wb")
+	pickle.dump(notes, file)
+	file.close()
+	
+def main():
+	try:
+		file = open(filename, "rb")
+	except IOError:
+		file = open(filename, "wb")
+		print("No default notebook was found, created one.")
+		file.close()
+	else:
+		content = pickle.load(file)
+		file.close()
+	# create a notebook list for storing notes
+	notebook = []
+	while True:
+		print("(1) Read the notebook\n(2) Add note\n\
+(3) Edit a note\n(4) Delete a note\n(5) Save and quit\n")
+		# get user's choice
+		selection = int(input("Please select one: "))
+		if selection == 1:
+			try:
+				file = open(filename, "rb")
+				content = pickle.load(file)
+			except EOFError:
+				pass
+			else:
+				for i in content:
+					print(i)
+					file.close()
+		elif selection == 2:
+			note = input("Write a new note: ")
+			notebook.append(note+":::"+time.strftime("%X %x"))
+			writefile(notebook)
+		elif selection == 3:
+			try:
+				print("The list has",len(notebook),"notes.")
+				index = int(input("Which of them will be changed?: "))
+				print(notebook.pop(index))
+			except IndexError: 
+				print("This index number is invalid")
+			else:
+				note = input("Give the new note: ")
+				notebook.insert(index, note+":::"+time.strftime("%X %x"))
+				writefile(notebook)
+		elif selection == 4:
+			try:
+				print("The list has",len(notebook),"notes.")
+				index = int(input("Which of them will be deleted?: "))
+				deleted = notebook.pop(index)
+			except IndexError:
+				deleted = notebook.pop()
+			print("Deleted note",deleted)
+		elif selection == 5:
+			writefile(notebook)
+			print("Notebook shutting down, thank you.")
+			break
+		else:
+			print("Incorrect selection")
+
+if __name__ == "__main__":
+    main()
