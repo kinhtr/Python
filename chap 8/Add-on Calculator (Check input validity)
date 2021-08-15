@@ -1,0 +1,54 @@
+# -*- coding: cp1252 -*- 
+
+import math 
+# function for obtaining user's input of number with error handler
+def getinput():
+	while True:
+		try:
+			number = int(input("Give a number: "))
+			return number
+			break
+		except (TypeError, ValueError):
+			print("This input is invalid.")
+					 
+print("Calculator")
+change = True
+while True:
+	if change:
+		# run getinput method to catch error until valid number is returned and assigned to variables
+		a = getinput()
+		b = getinput()
+	print("(1) +\n(2) -\n(3) *\n(4) /\
+\n(5)sin(number1/number2)\n(6)cos(number1/number2)\n(7)Change numbers\n(8)Quit")
+	print("Current numbers:", a, b)
+	selection = int(input("Please select something (1-6): "))
+	# set the change's value to False after the first round
+	change = False
+	if selection == 1:
+		c = a + b
+		print("The result is:", c)
+	elif selection == 2:
+		c = a - b
+		print("The result is:", c)
+	elif selection == 3:
+		c = a * b
+		print("The result is:", c)
+	elif selection == 4:
+		c = a / b
+		print("The result is:", c)
+	elif selection == 5:
+		c = math.sin(a/b)
+		print("The result is:", c)
+	elif selection == 6:
+		c = math.cos(a/b)
+		print("The result is:", c)
+	elif selection == 7:
+		# change's value return to True to make change number possible 
+		change = True
+		continue
+	elif selection == 8:
+		print("Thank you!")
+		break
+	else:
+		# do nothing
+		pass
