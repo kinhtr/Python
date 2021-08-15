@@ -1,0 +1,179 @@
+# Exercise
+
+def my_split(sentence, separator):
+	wordlist = []
+	item = ""
+	for i in sentence:
+		if i == separator:
+			wordlist.append(item)
+			item = ""
+		else:
+			item += i
+	if item:
+	    wordlist.append(item)
+	return wordlist
+
+def my_join(characters, connector):
+	string = ""
+	for i in characters[:-1]:
+		string += i + connector
+	string += characters[-1]
+	return string
+
+class Employee:
+    def __init__(self, id, name):
+        self.id = id
+        self.name = name
+    
+    def ask_name(self):
+        try:
+            self.name = str(input("Please enter employee name:"))
+        except Exception:
+            self.name = ""
+
+
+class SalaryEmployee(Employee):
+    def __init__(self, id, name, monthly_salary):
+        super().__init__(id, name)
+        self.monthly_salary = monthly_salary
+        self.type = "M"
+        
+    def ask_salary(self):
+        try:
+            self.monthly_salary = int(input("Please enter monthly salary:"))
+        except Exception:
+            self.monthly_salary = 0
+
+    def calculate_salary(self):
+        return self.monthly_salary
+    
+class HourlyEmployee(Employee):
+	# it is possible to define the name of parameters differently, e.g: c instead of hours_worked
+	def __init__(self, a, b, c, d):
+		super().__init__(a, b) # a ,b refer to id and name in the superclass
+		self.hours_worked = c
+		self.hour_rate = d
+		self.type = "H"
+		
+	def ask_salary(self):
+		try:
+			self.hours_worked = int(input("Please enter hours worked:"))
+		except Exception:
+			self.hours_worked = 0
+		try:
+			self.hour_rate = int(input("Please enter hour rate:"))
+		except Exception:
+			self.hour_rate = 0
+			
+	def calculate_salary(self):
+		self.monthly_salary = self.hour_rate * self.hours_worked
+		return self.monthly_salary
+			
+class CommissionEmployee(SalaryEmployee):
+	def __init__(self, id, name, monthly_salary, commission):
+		super().__init__(id, name, monthly_salary)
+		self.commission = commission
+		self.type = "C"
+	
+	def ask_salary(self):
+		try:
+			self.monthly_salary = int(input("Please enter monthly salary:"))
+		except:
+			self.monthly_salary = 0
+		try:
+			self.commission = int(input("Please enter commission:"))
+		except Exception:
+			self.commission= 0
+			
+	def calculate_salary(self):
+		return (self.monthly_salary + self.commission)
+		
+class PayrollSystem:
+    def printout(self, x):
+        for i in x:
+            print("Employee Payroll\n================")
+            print("Payroll for:",i.id,"-",i.name)
+            print("- Check amount:",i.calculate_salary())
+            print("")
+# Define list of employees and id 		
+salary_employees = []
+id = 1
+while True:
+    print("(1) Add employee to employees\n(2) Write employees to file\n\
+(3) Read employees from file\n(4) Print payroll\n(0) Quit\n")
+    selection = int(input("Please select one: "))
+    if selection == 1:
+        # Start asking name and salary and add them in a list of employees
+        while True:
+            types = int(input("Please enter salary type:\n(1) monthly\n(2) hourly\n\
+(3) commission\n(0) Quit\n"))
+			# Monthly
+            if types == 1:
+                employee = SalaryEmployee(id,"",0)
+                employee.ask_name()
+                employee.ask_salary()
+                salary_employees.append(employee)
+                id += 1
+            # Hourly    
+            elif types == 2:
+                employee = HourlyEmployee(id,"",0,0)
+                employee.ask_name()
+                employee.ask_salary()
+                salary_employees.append(employee)
+                id += 1
+            # Commission    
+            elif types == 3:
+                employee = CommissionEmployee(id,"",0,0)
+                employee.ask_name()
+                employee.ask_salary()
+                salary_employees.append(employee)
+                id += 1
+            # Exit the first loop   
+            elif types == 0:
+                break
+            
+            else:
+                print("Incorrect selection.")
+	# Write the list into file using my_join function to convert the list to string
+    elif selection == 2:
+        file = open("employee.csv", "w")
+        employees = []
+        for i in salary_employees:
+            if i.type == "M":
+                employees.append(str(i.id)+","+i.name+","+i.type+","+str(i.monthly_salary))
+            elif i.type == "H":
+                employees.append(str(i.id)+","+i.name+","+i.type+","+
+								 str(i.hours_worked)+","+str(i.hour_rate))
+            else:
+                employees.append(str(i.id)+","+i.name+","+i.type+","+
+								 str(i.monthly_salary)+","+str(i.commission))
+        string = my_join(employees, "\n")
+        string += "\n"
+        file.write(string)
+        file.close()
+        print(len(salary_employees) ," employee(s) added to employee.csv")
+    # Read the file into the list using my_split function to convert string to list 
+    elif selection == 3:
+        try:
+            file = open("employee.csv")
+        except IOError:
+            print("No such file!")
+            file.close()
+            continue
+        else:
+            content = file.read()
+            employeelist = []
+            employeelist = my_split(content, "\n")
+            print(len(salary_employees) ," employee(s) read from employee.csv")
+            file.close()
+    # Print out the list of employees and their payroll, payment type 
+    elif selection == 4:
+        payroll = PayrollSystem()
+        payroll.printout(salary_employees)
+    # Exit the second loop
+    elif selection == 0:
+        print("Service shutting down, thank you.")
+        break
+		
+    else:
+        print("Incorect selection.")
