@@ -1,0 +1,14 @@
+# -*- coding: cp1252 -*-
+
+try:
+	name = input("Give the file name: ")
+	file = open(name) # second parameter receives the default value "r"
+	number = int(file.read())
+except IOError:
+	print("There seems to be no file with that name.")
+except ValueError:
+	print("The file contents were unsuitable.")
+else: 
+	number = 1000 / number
+	print("The result was", number)
+	file.close()
