@@ -1,0 +1,25 @@
+# -*- coding: cp1252 -*-
+
+def main():
+	basket = []
+	while True:
+		option = int(input("Would you like to\n(1)Add or\n(2)Remove items or\n(3)Quit?: "))
+		if option == 1:
+			item = input("What will be added?: ")
+			basket.append(item)
+		elif option == 2:
+			print("There are", len(basket),"items in the list.")
+			try:
+        index = int(input("Which item is deleted?: "))
+				basket.pop(index)
+			except Exception:
+				print("Incorrect selection.")
+		elif option == 3:
+			print("The following items remain in the list:")
+			for i in basket:
+				print(i)
+			break
+		else:
+			print("Incorrect selection.")
+if __name__ == "__main__":
+    main()
