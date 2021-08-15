@@ -1,0 +1,59 @@
+lass Employee:
+	__identity = 1
+	__name = "No name"
+	# print method for printing out employee's info
+	def printout(self):
+		print("Id:",self.__identity,"Name:",self.__name)
+		
+	def setID(self, identity = 0):
+		self.__identity = identity
+		
+	def setname(self, name = "No name"):
+		self.__name = name
+	
+	def getID(self):
+		return self.__identity
+	def getname(self):
+		return self.__name
+
+class SalaryEmployee(Employee): #inheritance
+	__monthly_salary = 0
+	
+	def set_salary(self, salary = 0):
+		self.__monthly_salary = salary
+		
+	def calculate_salary(self):
+		return self.__monthly_salary
+	
+class PayrollSystem:
+	def calculate_payroll(self, total_employees = []):
+		for i in total_employees:
+			print("Employee Payroll\n================")
+			print("Payroll for:",i.getID(),"-",i.getname())
+			print("- Check amount: ",i.calculate_salary(),"\n",sep = "")
+def main():
+	employees = []
+	count = 1
+	while True:
+		fullname = input("Please enter employee name (0 to quit):")
+		# test if user input 0 or not, using try-except to catch potential ValueError
+		try:
+			if int(fullname) == 0: #test value error for integer conversion
+				break
+		except Exception:
+			pass
+		employees.append(SalaryEmployee())
+		employees[count-1].setID(count)
+		employees[count-1].setname(fullname)
+		try:
+		    salary = int(input("Please enter salary:"))
+		except Exception:
+		    pass 
+		else:
+		    employees[count-1].set_salary(salary)
+		count += 1
+	payroll = PayrollSystem()
+	payroll.calculate_payroll(employees)
+	
+if __name__ == "__main__":
+    main()
