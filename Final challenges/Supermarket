@@ -1,0 +1,27 @@
+# -*- coding: cp1252 -*-
+
+print("Supermarket\n===========")
+def main():
+	supermarket = [10,14,22,33,44,13,22,55,66,77]
+	total = 0
+	while True:
+		# Try-except for catching invalid input 
+		try:
+			product = int(input("Please select product (1-10) 0 to Quit: "))
+		except Exception:
+			print("Invalid selection, choose again")
+			continue
+		else:
+			if product == 0:
+				break
+			elif product >= 1 and product <= 10:
+				print("Product: ",product,"Price:",supermarket[product-1])
+				total += supermarket[product-1]
+			else:
+				print("We don't have product with this number!")	
+	print("Total: ",total)
+	payment = int(input("Payment: "))
+	print("Change: ", payment - total)
+	
+if __name__ == "__main__":
+    main()
