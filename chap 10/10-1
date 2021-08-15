@@ -1,0 +1,11 @@
+# -*- coding: cp1252 -*-
+
+def main():
+	colors = ["Blue", "Red", "Yellow", "Green"]
+	print("The first item in the list is:", colors[0])
+	print("The entire list printed one item a time:")
+	for i in colors:
+		print(i)
+	
+if __name__ == "__main__":
+    main()
