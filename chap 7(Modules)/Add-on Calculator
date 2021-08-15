@@ -1,0 +1,44 @@
+# -*- coding: cp1252 -*- 
+
+import math 
+
+print("Calculator")
+change = True
+while True:
+	if change:
+		a = int(input("Give the first number: "))
+		b = int(input("Give the second number: "))
+	print("(1) +\n(2) -\n(3) *\n(4) /\
+\n(5)sin(number1/number2)\n(6)cos(number1/number2)\n(7)Change numbers\n(8)Quit")
+	print("Current numbers:", a, b)
+	selection = int(input("Please select something (1-6): "))
+	# set the change's value to False after the first round
+	change = False
+	if selection == 1:
+		c = a + b
+		print("The result is:", c)
+	elif selection == 2:
+		c = a - b
+		print("The result is:", c)
+	elif selection == 3:
+		c = a * b
+		print("The result is:", c)
+	elif selection == 4:
+		c = a / b
+		print("The result is:", c)
+	elif selection == 5:
+		c = math.sin(a/b)
+		print("The result is:", c)
+	elif selection == 6:
+		c = math.cos(a/b)
+		print("The result is:", c)
+	elif selection == 7:
+		# change's value return to True to make change number possible 
+		change = True
+		continue
+	elif selection == 8:
+		print("Thank you!")
+		break
+	else:
+		# do nothing
+		pass
