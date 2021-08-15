@@ -1,0 +1,51 @@
+# -*- coding: cp1252 -*-
+
+import time
+	
+default = True
+while True:
+	if default:
+		default = False
+		try:
+			filename = "notebook.txt"
+			file = open(filename)
+		except IOError:
+			file = open(filename, "w")
+			print("No default notebook was found, created one.")
+			file.close()
+		else:
+			file.close()
+
+	print("Now using file", filename,"\n(1) Read the notebook\n(2) Add note\n\
+(3) Empty the notebook\n(4) Change the notebook\n(5) Quit\n")
+	# get user's choice
+	selection = int(input("Please select one: "))
+
+	if selection == 1:
+		file = open(filename, "r")
+		content = file.read()
+		print(content)
+	elif selection == 2:
+		file = open(filename, "a")
+		text = input("Write a new note: ")
+		file.write(text+":::"+time.strftime("%X %x"))
+	elif selection == 3:
+		file = open(filename, "w")
+		file.write("")
+		print("Notes deleted.")
+	elif selection == 4:
+		filename = input("Give the name of the new file: ")
+		try:
+			file = open(filename)
+		except IOError:
+			print("No notebook with that name detected, created one.")
+			file = open(filename, "w")
+			file.close()
+		else:
+			file.close()
+	elif selection == 5:
+		print("Notebook shutting down, thank you.")
+		break
+	else:
+		print("Incorrect selection")
+file.close()
