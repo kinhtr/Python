@@ -1,0 +1,29 @@
+# Python 2
+class Solution(object):
+    def findMedianSortedArrays(self, nums1, nums2):
+        c = nums1 + nums2
+        c.sort()
+        l = len(c)
+        median = 0.0
+        if (l % 2 == 0):
+            middle = int(l / 2)
+            median = (c[middle] + c[middle - 1]) / 2.0 #In Python 2, division results in an integer number if both operands are integer
+        else:
+            middle = int((l - 1) / 2)
+            median = c[middle]
+        return(median)
+        
+#Python 3
+class Solution:
+    def findMedianSortedArrays(self, nums1: List[int], nums2: List[int]) -> float:
+        c = nums1 + nums2
+        c.sort()
+        l = len(c)
+        median = 0.0
+        if (l % 2 == 0):
+            middle = int(l / 2)
+            median = (c[middle] + c[middle - 1]) / 2 #Division returns a floating point number in Python 3 
+        else:
+            middle = int((l - 1) / 2)
+            median = c[middle]
+        return(median)
