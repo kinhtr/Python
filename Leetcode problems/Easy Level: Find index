@@ -1,0 +1,17 @@
+# Find indices of 2 numbers of a list as such that their sum matches a target number
+class Solution(object):
+    def twoSum(self, nums, target):
+        i = 0
+        answer = []
+        while i < len(nums):
+            j = i+1
+            while j < len(nums):
+                sum = nums[i] + nums[j]
+                if sum == target:
+                    answer.extend((i,j))
+                    i = len(nums)
+                    break
+                else:
+                    j += 1
+            i += 1
+        return answer
